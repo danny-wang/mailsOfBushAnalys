@@ -1,0 +1,3 @@
+1：运行 pre_process_before_vis.py 生成 画图需要的数据的格式
+2: 将步骤1 生成的数据拷贝到Network_images.html 中（由于画图使用的js，然而这个程序只是一段代码，不是一个完整的项目，处于安全性考虑，js机制不能读取本地文件）
+3：在浏览器中打开 Network-images.html 即可
