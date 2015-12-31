@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<!-- saved from url=(0069)http://visjs.org/examples/network/exampleApplications/nodeLegend.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Network | Images</title>
+
+  <style type="text/css">
+    html, body {
+      font: 10pt arial;
+      padding: 0;
+      margin: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    #mynetwork {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+
+  <script async="" src="./Network _ Images_files/analytics.js"></script><script type="text/javascript" src="./Network _ Images_files/vis.js"></script>
+  <link href="./Network _ Images_files/vis.css" rel="stylesheet" type="text/css">
+
+  <script type="text/javascript">
+ 
+    var nodes = null;
+    var edges = null;
+    var network = null;
+
+    var LENGTH_MAIN = 700,
+        LENGTH_SERVER = 300,
+        LENGTH_SUB = 50,
+        WIDTH_SCALE = 2,
+        GREEN = 'green',
+        RED = '#C5000B',
+        ORANGE = 'orange',
+    //GRAY = '#666666',
+        GRAY = 'gray',
+        BLACK = '#2B1B17';
+
+    // Called when the Visualization API is loaded.
+    function draw() {
+      // Create a data table with nodes.
+      nodes = [];
+
+      // Create a data table with links.
+      edges = [];
+
+// 
+      datal=['佛罗里达州的教育','美国文化','佛罗里达州的经济','佛罗里达州的居民生活保障','佛罗里达州的未成年犯罪','佛罗里达州的女性问题',
+      '弗洛里达州的犯罪','新闻','弗洛里达州的环境','佛罗里达州的政治','佛罗里达州的儿童问题','佛罗里达州的工业','佛罗里达州的政府居民服务','美国和中东的军事','佛罗里达州的毒品法','佛罗里达州的立法']
+      datan=[4189,3490,1992,3722,2425,616,1777,6130,1455,747,17466,1062,4084,11858,1300,12537]
+      nodes.push({id: 2, label: 'Job.Bush', group: 'server', value: 8});
+
+      // group around 2
+      for (var i = 100; i <= 110; i++) {
+        var value =  1;
+        var width = WIDTH_SCALE * (datan[i-100]/3000);
+        var color = GRAY;
+        var label = '';
+        if (width>5) {
+          color = RED;
+          value=10
+        }
+        // if (i === 102) {
+        else if (width>3){
+        	color="#FF3030"
+        	value=8
+        }
+        else if (width>1){
+        	color="#FF8C69"
+        	vaule=5
+        }
+        else{
+        	color="#FFA07A"
+        	color=GREEN
+        	value=1
+        }
+        
+        
+
+         
+           
+        // }
+
+        nodes.push({id: i, label: datal[i-100], group: 'desktop', value: value,color:color});
+        edges.push({from: 2, to: i, length: LENGTH_SUB, color: color, fontColor: color, width: width, label: label});
+      }
+       
+
+        // legend
+      var mynetwork = document.getElementById('mynetwork');
+      var x = - mynetwork.clientWidth / 2 + 50;
+      var y = - mynetwork.clientHeight / 2 + 50;
+      var step = 70;
+ 
+      // create a network
+      var container = document.getElementById('mynetwork');
+      var data = {
+        nodes: nodes,
+        edges: edges
+      };
+      var options = {
+        nodes: {
+          scaling: {
+            min: 16,
+            max: 32
+          }
+        },
+        edges: {
+          color: GRAY,
+          smooth: false
+        },
+        physics:{
+          barnesHut:{gravitationalConstant:-30000},
+          stabilization: {iterations:2500}
+        },
+        groups: {
+          'switch': {
+            shape: 'triangle',
+            color: '#FF9900' // orange
+          },
+          desktop: {
+            shape: 'dot',
+            color: "#2B7CE9" // blue
+          },
+          mobile: {
+            shape: 'dot',
+            color: "#5A1E5C" // purple
+          },
+          server: {
+            shape: 'square',
+            color: "#C5000B" // red
+          },
+          internet: {
+            shape: 'square',
+            color: "#109618" // green
+          }
+        }
+      };
+      network = new vis.Network(container, data, options);
+    }
+  </script>
+  <script src="./Network _ Images_files/googleAnalytics.js"></script>
+</head>
+
+<body onload="draw()">
+
+<div id="mynetwork"><div class="vis-network" tabindex="900" style="position: relative; overflow: hidden; touch-action: none; -webkit-user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); width: 100%; height: 100%;"><canvas width="1920" height="947" style="position: relative; touch-action: none; -webkit-user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); width: 100%; height: 100%;"></canvas></div></div>
+
+</body></html>
